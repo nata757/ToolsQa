@@ -12,10 +12,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class ProgressBarPage extends PageBase {
-    WebDriver driver;
+
     public ProgressBarPage (WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+      super(driver);
     }
     @FindBy(xpath = "//button[@id='startStopButton']")
     private WebElement startStopButton;
@@ -32,17 +31,17 @@ public class ProgressBarPage extends PageBase {
     public void explicitWaitPercent(String percent) {
         new WebDriverWait(driver, Duration.ofSeconds(30))
                 .until(ExpectedConditions.attributeToBe(progressbar, ATTRIBUT_NAME, percent));
-                //sleep(3000);
+
     }
 
     public void fluentWaitPercent(String percent) {
         new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(10))
+                .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofNanos(2000000))
                 .until(ExpectedConditions.attributeToBe(progressbar, ATTRIBUT_NAME, percent));
     }
 public void clickToStop(String percent) {
-     // explicitWaitPercent(percent);
+      //explicitWaitPercent(percent);
         fluentWaitPercent(percent);
         startStopButton.click();
 }
