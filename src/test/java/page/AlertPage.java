@@ -19,9 +19,16 @@ public class AlertPage extends PageBase {
     @FindBy(xpath = "//button[@id=\"timerAlertButton\"]")
     private WebElement timerAlertButton;
 
-
+// 1.В POM описать веб-элименты кнопки Click me и поля, где появляется ожидаемый текст ("You selected Ok")
     @FindBy(xpath = "//button[@id='confirmButton']")
     private WebElement confirmBox;
+    @FindBy(xpath = "//span[@id='confirmResult']")
+    private WebElement confirmResult;
+
+@FindBy(xpath = "//button[@id='promtButton']")
+private WebElement promptButton;
+@FindBy(xpath = "//span[@id='promptResult']")
+private WebElement promptResult;
 
 
 
@@ -31,7 +38,7 @@ public class AlertPage extends PageBase {
                 .until(ExpectedConditions.alertIsPresent());
 
     }
-
+    //2.Написать метод, который кликает по кнопке Click me и ждет появления alert
     public void clickConfirmBox() {
         confirmBox.click();
         new WebDriverWait(driver, Duration.ofSeconds(6))
@@ -44,13 +51,36 @@ public class AlertPage extends PageBase {
         return alert.getText();
 
     }
-
+//3.Написать метод, который нажимает на кнопку ok в alert (первая строчка в этом методе должна метод содержать переключения на alert)
    public void clickToOk(){
-       Alert alert = driver.switchTo().alert();
-       alert.accept();
+       Alert alert = driver.switchTo().alert();// записали метод переключения на alert
+       alert.accept();// нажимает на кнопку ок
+
    }
+   //4.Написать метод, который возвращает текст из веб-элемента, в котором появляется текст
+    public String getConfirmText (){
+        return confirmResult.getText();
+    }
+
     public void clickToCancel(){
         Alert alert = driver.switchTo().alert();
         alert.dismiss();
     }
+
+    public void clickPrompt() {
+        promptButton.click();
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.alertIsPresent());
+
+    }
+    public void clickPromptOk(String text){
+        Alert alert = driver.switchTo().alert();// записали метод переключения на alert
+        alert.sendKeys(text);
+        alert.accept();// нажимает на кнопку ок
+    }
+    public String getPromptText (){
+        return promptResult.getText();
+    }
+
+
 }
