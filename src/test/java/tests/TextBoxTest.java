@@ -26,8 +26,9 @@ TextBoxPage textBoxPage;
         textBoxPage.fillTextBox(name, email, currentPermanent, permanentAddress);
         Assert.assertTrue(textBoxPage.getResultText("name").contains(name));
         Assert.assertEquals(textBoxPage.getResultText("name"), "Name:"+ name);
-
-
+        Assert.assertEquals(textBoxPage.getResultText("email"), "Email:"+ email);
+        Assert.assertEquals(textBoxPage.getResultText("currentAddress"), "Current Address :"+ currentPermanent);
+        Assert.assertEquals(textBoxPage.getResultText("permanentAddress"), "Permananet Address :"+ permanentAddress);
     }
 }
 
