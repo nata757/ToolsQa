@@ -37,17 +37,15 @@ public class DragAndDropTest extends  TestBase {
     Assert.assertEquals(startLoc, finishLoc);
         }
         @Test
-    public void notRevertDDTest(){
-    dragAndDropPage = new DragAndDropPage(driver);
-    dragAndDropPage.click(dragAndDropPage.revertDraggableTab);
-    Point startLoc = dragAndDropPage.getLoc(dragAndDropPage.notReverttable);
-    dragAndDropPage.dragAndDrop(dragAndDropPage.notReverttable, dragAndDropPage.revertableDropContainer);
-    Point finishLoc = dragAndDropPage.getLoc(dragAndDropPage.notReverttable);
-    String attr = dragAndDropPage.getAttr();
-   // dragAndDropPage.dragAndDropLoc(dragAndDropPage.notReverttable, startLoc.getX(),startLoc.getY());
-     dragAndDropPage.dragAndDrop(dragAndDropPage.notReverttable, dragAndDropPage.revertable);
-    dragAndDropPage.waitNotRevert(attr);
-    Point secondFinishLoc = dragAndDropPage.getLoc(dragAndDropPage.notReverttable);
-    Assert.assertEquals(finishLoc, secondFinishLoc);
+    public void notRevertDDTest() throws InterruptedException {
+            dragAndDropPage = new DragAndDropPage(driver);
+            dragAndDropPage.clickTo(dragAndDropPage.revertDraggableTab);
+            dragAndDropPage.dragAndDrop(dragAndDropPage.notReverttable, dragAndDropPage.revertableDropContainer);
+            Point finishLoc = dragAndDropPage.getLoc(dragAndDropPage.notReverttable);
+            dragAndDropPage.dragAndDrop(dragAndDropPage.notReverttable, dragAndDropPage.revertable);
+            Thread.sleep(3000);
+            Point secondFinishLoc = dragAndDropPage.getLoc(dragAndDropPage.notReverttable);
+            Assert.assertEquals(finishLoc, secondFinishLoc);
+
         }
 }

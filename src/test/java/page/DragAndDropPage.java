@@ -60,12 +60,4 @@ public class DragAndDropPage extends PageBase {
                         "position: relative; left: 0px; top: 0px;"));
     }
 
-    public String getAttr(){
-        return revertable.getAttribute("style");
-    }
-    public void waitNotRevert(String value){
-        new WebDriverWait(driver, Duration.ofSeconds(4))
-                .until(ExpectedConditions.attributeToBe(revertable, "style",
-                        value));
-    }
 }
